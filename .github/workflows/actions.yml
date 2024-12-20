@@ -1,0 +1,26 @@
+name:My First Github Project
+on:[push]
+
+jobs:
+  build:
+    runs-on:ubuntu-latest
+
+  strategy:
+    matrix:
+      python-version:[3.8,3.9]
+
+  steps:
+    -uses:actions/checkout@v3
+    -name:Set up Python
+     uses:acions/setup-python
+     with:
+       python-version:${{matix.python-version}}
+
+    -name:Install Dependencies
+     run:|
+       python -m pip install --upgrade pip
+       pip install pytest
+
+     -name:Run tests
+      run:|
+       python -m pytest addition.py
